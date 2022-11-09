@@ -1,89 +1,51 @@
-class Single_ll {public static void main(String[] args) {
-    MyCustomList myList = new MyCustomList();
+public class Single_ll {
+    Node head;
+    class Node {
+        int data;
+        Node next;
 
-    myList.add(5);
-    myList.print();
-
-    myList.add(1);
-    myList.print();
-
-    myList.add(2);
-    myList.print();
-    
-    myList.delete(5);
-    myList.print();
-
-}
-}
-
-class MyCustomList {
-Node head;
-
-public void add(int data) {
-    Node newNode = new Node(data);
-
-    if (head == null) {
-        // list is empty
-        head = newNode;
-
-    } else {
-        // list is not empty
-        Node temp = head;
-        while (temp.nextNode != null) {
-            temp = temp.nextNode;
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
         }
-        // now head is the last node in the current list
-        temp.nextNode = newNode;
     }
-}
-
-public void print() {
-    if (head == null) {
-        System.out.println("List is empty");
-        return;
-    }
-    Node temp = head;
-    while (temp != null) {
-        System.out.print(temp.data + " ");
-        temp = temp.nextNode;
-    }
-    System.out.println(" ");
-}
-
-public void delete(int data) {
-    if (head == null) {
-        // list is empty
-        System.out.println("list is empty, can't delete anything");
-        return;
-    }
-    if (head.data == data) {
-        // first node has data to be deleted;
-        head = head.nextNode;
-        System.out.println("Deleted" + " " + data);
-        return;
-    }
-    Node temp = head;
-    while (temp.nextNode != null) {
-        if (temp.nextNode.data == data) {
-
-            temp.nextNode = temp.nextNode.nextNode;
-            System.out.println("Deleted" + data);
+    public void add(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = newNode;
             return;
-        } else {
-            temp = temp.nextNode;
         }
+        newNode.next = head;
+        head = newNode;
+      }
+      public void print(){
+        if(head==null){
+            System.out.print("list is empty");
+            return;
+        }
+        Node currNode = head;
+        while(currNode != null){
+            System.out.print(currNode.data+" ");
+            currNode = currNode.next;
+        }
+        System.out.println("");
+      }
+      public void delete(){
+        if(head==null){
+            System.out.print("nothing to delete");
+        }
+        head = head.next;
+      }
+
+    public static void main(String[] args){
+        Single_ll list = new Single_ll();
+        list.add(5);
+        list.add(7);
+        list.add(2);
+        list.add(4);
+        list.print();
+
+        list.delete();
+        list.print();
     }
-    System.out.println(data + "doesn't exist");
-}
-}
-
-class Node {
-public int data;
-public Node nextNode;
-
-// parameterized constructor;
-public Node(int data) {
-    this.data = data;
-}
-    
 }
